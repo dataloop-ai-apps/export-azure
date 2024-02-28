@@ -3,7 +3,7 @@
   "name": "azure-export",
   "description": "Import and Export annotations to Azure container, Requires Azure Blob integration to use, please refer to data governance for more information",
   "attributes": {
-    "Provider": "Google",
+    "Provider": "Microsoft",
     "Category": "Pipeline",
     "Pipeline Type": "Node",
     "Node Type":"Data"
