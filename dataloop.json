@@ -1,7 +1,7 @@
 {
   "displayName": "Azure Export",
   "name": "azure-export",
-  "description": "Import and Export annotations to Azure container",
+  "description": "Import and Export annotations to Azure container, Requires Azure Blob integration to use, please refer to data governance for more information",
   "attributes": {
     "Provider": "Google",
     "Category": "Pipeline",
@@ -122,7 +122,7 @@
       {
         "name": "azure-hooks",
         "entryPoint": "modules/azure_hooks.py",
-        "className": "HookIntegrationAzure",
+        "className": "AzureExport",
         "initInputs": [
           {
             "type": "staring",
