@@ -1,188 +1,194 @@
 {
-  "displayName": "Azure Export",
-  "name": "azure-export",
-  "description": "Import and Export annotations to Azure container, Requires Azure Blob integration to use, please refer to data governance for more information",
-  "attributes": {
-    "Provider": "Microsoft",
-    "Category": "Pipeline",
-    "Pipeline Type": "Node",
-    "Node Type":"Data"
-  },
-  "version": "1.0.3",
-  "icon": "icon-dl-function",
-  "scope": "public",
-  "codebase": {
-    "type": "git",
-    "gitUrl": "https://github.com/dataloop-ai-apps/export-azure.git",
-    "gitTag": "1.0.3"
-  },
-  "components": {
-    "pipelineNodes": [
-      {
-        "invoke": {
-          "type": "function",
-          "namespace": "azure-hooks.export_annotation"
-        },
-        "name": "Azure Export Annotations",
-        "categories": ["data"],
-        "displayName": "Azure Export Annotations",
-        "description": "Export an item annotations to Azure container",
-        "scope": "node",
-        "configuration": {
-          "fields": [
-            {
-              "name": "name",
-              "title": "Node Name",
-              "props": {
-                "title": true,
-                "type": "string",
-                "default": "Azure Export Annotations",
-                "required": true,
-                "placeholder": "Insert node name"
-              },
-              "rules": [
-                {
-                  "type": "required",
-                  "effect": "error"
-                }
-              ],
-              "widget": "dl-input"
-            },
-            {
-              "name": "container_name",
-              "title": "Container Name",
-              "props": {
-                "type": "string",
-                "title": true,
-                "required": true,
-                "placeholder": "Insert container name"
-              },
-              "rules": [
-                {
-                  "type": "required",
-                  "effect": "error"
-                }
-              ],
-              "widget": "dl-input"
-            }
-          ]
-        }
-      },
-      {
-        "invoke": {
-          "type": "function",
-          "namespace": "azure-hooks.import_annotation"
-        },
-        "name": "Azure Import Annotations",
-        "categories": ["data"],
-        "displayName": "Azure Import Annotations",
-        "description": "Import an annotations to an item from Azure container",
-        "scope": "node",
-        "configuration": {
-          "fields": [
-            {
-              "name": "name",
-              "title": "Node Name",
-              "props": {
-                "title": true,
-                "type": "string",
-                "default": "Azure Import Annotations",
-                "required": true,
-                "placeholder": "Insert node name"
-              },
-              "rules": [
-                {
-                  "type": "required",
-                  "effect": "error"
-                }
-              ],
-              "widget": "dl-input"
-            },
-            {
-              "name": "container_name",
-              "title": "Container Name",
-              "props": {
-                "type": "string",
-                "required": true,
-                "placeholder": "Insert container name"
-              },
-              "rules": [
-                {
-                  "type": "required",
-                  "effect": "error"
-                }
-              ],
-              "widget": "dl-input"
-            }
-          ]
-        }
-      }
-    ],
-    "modules": [
-      {
-        "name": "azure-hooks",
-        "entryPoint": "modules/azure_hooks.py",
-        "className": "AzureExport",
-        "initInputs": [
-          {
-            "type": "staring",
-            "name": "integration_name"
-          }
-        ],
-        "functions": [
-          {
-            "name": "export_annotation",
-            "description": "Export an item annotations to Azure container",
-            "input": [
-              {
-                "type": "Item",
-                "name": "item"
-              }
-            ],
-            "output": [
-              {
-                "type": "Item",
-                "name": "item"
-              }
-            ],
-            "displayIcon": "function",
-            "displayName": "Azure Export Annotations"
-          },
-          {
-            "name": "import_annotation",
-            "description": "Import an annotations to an item from Azure container",
-            "input": [
-              {
-                "type": "Item",
-                "name": "item"
-              }
-            ],
-            "output": [
-              {
-                "type": "Item",
-                "name": "item"
-              }
-            ],
-            "displayIcon": "function",
-            "displayName": "Azure Import Annotations"
-          }
+    "displayName": "Azure Export",
+    "name": "azure-export",
+    "description": "Import and Export annotations to Azure container, Requires Azure Blob integration to use, please refer to data governance for more information",
+    "attributes": {
+        "Provider": "Microsoft",
+        "Category": "Application",
+        "Application Type": [
+            "Pipeline Node",
+            "Data Management"
         ]
-      }
-    ],
-    "services": [
-      {
-        "name": "azure-hooks",
-        "moduleName": "azure-hooks",
-        "runtime": {
-          "podType": "regular-xs",
-          "concurrency": 10,
-          "autoscaler": {
-            "minReplicas": 0,
-            "maxReplicas": 2,
-            "queueLength": 10
-          }
-        }
-      }
-    ]
-  }
+    },
+    "version": "1.0.3",
+    "icon": "icon-dl-function",
+    "scope": "public",
+    "codebase": {
+        "type": "git",
+        "gitUrl": "https://github.com/dataloop-ai-apps/export-azure.git",
+        "gitTag": "1.0.3"
+    },
+    "components": {
+        "pipelineNodes": [
+            {
+                "invoke": {
+                    "type": "function",
+                    "namespace": "azure-hooks.export_annotation"
+                },
+                "name": "Azure Export Annotations",
+                "categories": [
+                    "data"
+                ],
+                "displayName": "Azure Export Annotations",
+                "description": "Export an item annotations to Azure container",
+                "scope": "node",
+                "configuration": {
+                    "fields": [
+                        {
+                            "name": "name",
+                            "title": "Node Name",
+                            "props": {
+                                "title": true,
+                                "type": "string",
+                                "default": "Azure Export Annotations",
+                                "required": true,
+                                "placeholder": "Insert node name"
+                            },
+                            "rules": [
+                                {
+                                    "type": "required",
+                                    "effect": "error"
+                                }
+                            ],
+                            "widget": "dl-input"
+                        },
+                        {
+                            "name": "container_name",
+                            "title": "Container Name",
+                            "props": {
+                                "type": "string",
+                                "title": true,
+                                "required": true,
+                                "placeholder": "Insert container name"
+                            },
+                            "rules": [
+                                {
+                                    "type": "required",
+                                    "effect": "error"
+                                }
+                            ],
+                            "widget": "dl-input"
+                        }
+                    ]
+                }
+            },
+            {
+                "invoke": {
+                    "type": "function",
+                    "namespace": "azure-hooks.import_annotation"
+                },
+                "name": "Azure Import Annotations",
+                "categories": [
+                    "data"
+                ],
+                "displayName": "Azure Import Annotations",
+                "description": "Import an annotations to an item from Azure container",
+                "scope": "node",
+                "configuration": {
+                    "fields": [
+                        {
+                            "name": "name",
+                            "title": "Node Name",
+                            "props": {
+                                "title": true,
+                                "type": "string",
+                                "default": "Azure Import Annotations",
+                                "required": true,
+                                "placeholder": "Insert node name"
+                            },
+                            "rules": [
+                                {
+                                    "type": "required",
+                                    "effect": "error"
+                                }
+                            ],
+                            "widget": "dl-input"
+                        },
+                        {
+                            "name": "container_name",
+                            "title": "Container Name",
+                            "props": {
+                                "type": "string",
+                                "required": true,
+                                "placeholder": "Insert container name"
+                            },
+                            "rules": [
+                                {
+                                    "type": "required",
+                                    "effect": "error"
+                                }
+                            ],
+                            "widget": "dl-input"
+                        }
+                    ]
+                }
+            }
+        ],
+        "modules": [
+            {
+                "name": "azure-hooks",
+                "entryPoint": "modules/azure_hooks.py",
+                "className": "AzureExport",
+                "initInputs": [
+                    {
+                        "type": "staring",
+                        "name": "integration_name"
+                    }
+                ],
+                "functions": [
+                    {
+                        "name": "export_annotation",
+                        "description": "Export an item annotations to Azure container",
+                        "input": [
+                            {
+                                "type": "Item",
+                                "name": "item"
+                            }
+                        ],
+                        "output": [
+                            {
+                                "type": "Item",
+                                "name": "item"
+                            }
+                        ],
+                        "displayIcon": "function",
+                        "displayName": "Azure Export Annotations"
+                    },
+                    {
+                        "name": "import_annotation",
+                        "description": "Import an annotations to an item from Azure container",
+                        "input": [
+                            {
+                                "type": "Item",
+                                "name": "item"
+                            }
+                        ],
+                        "output": [
+                            {
+                                "type": "Item",
+                                "name": "item"
+                            }
+                        ],
+                        "displayIcon": "function",
+                        "displayName": "Azure Import Annotations"
+                    }
+                ]
+            }
+        ],
+        "services": [
+            {
+                "name": "azure-hooks",
+                "moduleName": "azure-hooks",
+                "runtime": {
+                    "podType": "regular-xs",
+                    "concurrency": 10,
+                    "autoscaler": {
+                        "minReplicas": 0,
+                        "maxReplicas": 2,
+                        "queueLength": 10
+                    }
+                }
+            }
+        ]
+    }
 }
