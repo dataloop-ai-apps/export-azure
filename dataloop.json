@@ -152,7 +152,7 @@
                 "name": "item"
               }
             ],
-            "displayIcon": "function",
+            "displayIcon": "icon-dl-export-annotations",
             "displayName": "Azure Export Annotations"
           },
           {
@@ -170,7 +170,7 @@
                 "name": "item"
               }
             ],
-            "displayIcon": "function",
+            "displayIcon": "icon-dl-import-annotations",
             "displayName": "Azure Import Annotations"
           }
         ]
