@@ -9,7 +9,7 @@
       "Pipeline Node",
       "Data Management"
     ],
-    "Media Type": "All Media Types"
+    "Media Type": ["All Media Types"]
   },
   "version": "1.0.8",
   "icon": "icon-dl-function",
