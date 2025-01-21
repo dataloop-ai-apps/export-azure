@@ -11,20 +11,34 @@ logger = logging.getLogger(name='Azure Export & Import')
 
 
 class AzureExport(dl.BaseServiceRunner):
-    def __init__(self, integration_name):
-        connection_string = os.environ.get(integration_name.replace('-', '_'))
+    def __init__(self):
+        """
+        Initializes the ServiceRunner with Azure Export & Import API credentials.
+        """
+        self.logger = logger
+        self.logger.info('Initializing Azure Export & Import API client')
+        raw_credentials = os.environ.get("AZURE_API_KEY", None)
+        if raw_credentials is None:
+            raise ValueError(f"Missing Azure integration.")
 
-        integration_info = base64.b64decode(connection_string).decode("utf-8")
-        integration_info = json.loads(integration_info)
-        credential = ClientSecretCredential(
-            tenant_id=integration_info['tenantId'],
-            client_id=integration_info['clientId'],
-            client_secret=integration_info['secret']
+        try:
+            decoded_credentials = base64.b64decode(raw_credentials).decode("utf-8")
+            credentials_json = json.loads(decoded_credentials)
+            credentials = json.loads(credentials_json['content'])
+        except Exception:
+            raise ValueError(f"Unable to decode the service integration. "
+                             f"Please refer to the following guide for proper usage of Azure integrations with"
+                             f"Dataloop: https://github.com/dataloop-ai-apps/export-azure/blob/main/README.md")
+
+        client_secret_credential = ClientSecretCredential(
+            tenant_id=credentials['tenantId'],
+            client_id=credentials['clientId'],
+            client_secret=credentials['secret']
         )
         # Create a BlobServiceClient using the Azure AD credential
         self.blob_service_client = BlobServiceClient(
-            account_url=f"https://{integration_info['key']}.blob.core.windows.net",
-            credential=credential
+            account_url=f"https://{credentials['key']}.blob.core.windows.net",
+            credential=client_secret_credential
         )
 
     def export_annotation(self, item: dl.Item, context: dl.Context):
@@ -56,31 +70,3 @@ class AzureExport(dl.BaseServiceRunner):
         data = json.loads(blob_data.decode('utf-8'))
         item.annotations.upload(annotations=data['annotations'])
         return item
-
-
-def test():
-    class Node:
-        def __init__(self, metadata):
-            self.metadata = metadata
-
-    service_runner = AzureExport(integration_name="<integration name>")
-    original_item = dl.items.get(item_id='')
-    original_annotations = original_item.annotations.list()
-    remote_filepath = "/clones/1.jpg"
-    try:
-        item = original_item.dataset.items.get(filepath=remote_filepath)
-        item.delete()
-    except dl.exceptions.NotFound:
-        pass
-
-    item = original_item.clone(remote_filepath=remote_filepath)
-    context = dl.Context()
-    context._node = Node(metadata={'customNodeConfig': {'container_name': ''}})
-    service_runner.export_annotation(item=item, context=context)
-    item.annotations.delete(filters=dl.Filters(resource=dl.FiltersResource.ANNOTATION))
-    service_runner.import_annotation(item=item, context=context)
-    assert len(item.annotations.list()) == len(original_annotations)
-
-
-if __name__ == '__main__':
-    test()
