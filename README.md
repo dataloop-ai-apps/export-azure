@@ -35,16 +35,16 @@ The file will be downloaded from the following location: \
 
 ## Setting Up Your Azure Project
 
-To use these nodes, you need an Amazon Web Services (AWS) project. Follow these steps to get started: \
+To use these nodes, you need an Amazon Web Services (Azure) project. Follow these steps to get started: \
 [Azure Private Key Integration](https://docs.dataloop.ai/docs/private-key-integration)
 
 
-## Integrating AWS Export & Import API with Dataloop Platform
+## Integrating Azure Export & Import API with Dataloop Platform
 
 - Visit the [Dataloop Marketplace](https://docs.dataloop.ai/docs/marketplace), under Applications tab.
 - Select the application and click on "Install" and then "Proceed".
   ![marketplace.png](assets/marketplace.png)
-- Select an existing AWS integration or add a new one by creating an AWS integration with `key` and `secret`.
+- Select an existing Azure integration or add a new one by creating an Azure integration with `key` and `secret`.
   ![add_integration.png](assets/add_integration.png)
 - Install the application.
   ![add_integration_to_app.png](assets/add_integration_to_app.png)
