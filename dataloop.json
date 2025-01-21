@@ -135,12 +135,10 @@
         "name": "azure-hooks",
         "entryPoint": "modules/azure_hooks.py",
         "className": "AzureExport",
-        "initInputs": [
-          {
-            "type": "staring",
-            "name": "integration_name"
-          }
+        "integrations": [
+           "dl-azure-api-key"
         ],
+        "initInputs": [],
         "functions": [
           {
             "name": "export_annotation",
