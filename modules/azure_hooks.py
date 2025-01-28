@@ -23,8 +23,7 @@ class AzureExport(dl.BaseServiceRunner):
 
         try:
             decoded_credentials = base64.b64decode(raw_credentials).decode("utf-8")
-            credentials_json = json.loads(decoded_credentials)
-            credentials = json.loads(credentials_json['content'])
+            credentials = json.loads(decoded_credentials)
         except Exception:
             raise ValueError(f"Unable to decode the service integration. "
                              f"Please refer to the following guide for proper usage of Azure integrations with"
