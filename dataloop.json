@@ -136,7 +136,7 @@
         "entryPoint": "modules/azure_hooks.py",
         "className": "AzureExport",
         "integrations": [
-           "dl-azure-api-key"
+           "dl-azure-integration"
         ],
         "initInputs": [],
         "functions": [

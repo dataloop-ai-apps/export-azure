@@ -17,7 +17,7 @@ class AzureExport(dl.BaseServiceRunner):
         """
         self.logger = logger
         self.logger.info('Initializing Azure Export & Import API client')
-        raw_credentials = os.environ.get("AZURE_API_KEY", None)
+        raw_credentials = os.environ.get("AZURE_INTEGRATION", None)
         if raw_credentials is None:
             raise ValueError(f"Missing Azure integration.")
 
