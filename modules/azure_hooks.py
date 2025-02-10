@@ -25,9 +25,9 @@ class AzureExport(dl.BaseServiceRunner):
             decoded_credentials = base64.b64decode(raw_credentials).decode("utf-8")
             credentials = json.loads(decoded_credentials)
         except Exception:
-            raise ValueError(f"Failed to decode the service integration. Refer to the guide for proper Azure "
-                             f"integrations usage with Dataloop: "
-                             f"https://github.com/dataloop-ai-apps/export-azure/blob/main/README.md")
+            raise ValueError("Failed to decode the service integration. Refer to the guide for proper Azure "
+                             "integrations usage with Dataloop: "
+                             "https://github.com/dataloop-ai-apps/export-azure/blob/main/README.md")
 
         client_secret_credential = ClientSecretCredential(
             tenant_id=credentials['tenantId'],
