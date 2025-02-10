@@ -37,9 +37,9 @@ The file will be downloaded from the following location: \
 
 To use these nodes, you need an Amazon Web Services (Azure) project. Follow these steps to get started:
 
-1. Create a [Client Secret](https://docs.dataloop.ai/docs/azure-datalake-gen2-1#:~:text=for%20the%20integration.-,Create%20a%20New%20Client%20Secret,-Once%20you%20create).
-2. Create a [Storage Account](https://docs.dataloop.ai/docs/azure-datalake-gen2-1#:~:text=the%20Integration%20phase.-,Create%20a%20Storage%20Account,-Open%20Microsoft%20Azure).
-3. Create a [Container](https://docs.dataloop.ai/docs/azure-datalake-gen2-1#:~:text=account%20in%20Azure.-,Create%20a%20Container,-Open%20Microsoft%20Azure).
+1. Create an Azure [Client Secret](https://docs.dataloop.ai/docs/azure-datalake-gen2-1#:~:text=for%20the%20integration.-,Create%20a%20New%20Client%20Secret,-Once%20you%20create).
+2. Create an Azure [Storage Account](https://docs.dataloop.ai/docs/azure-datalake-gen2-1#:~:text=the%20Integration%20phase.-,Create%20a%20Storage%20Account,-Open%20Microsoft%20Azure).
+3. Create an Azure [Container](https://docs.dataloop.ai/docs/azure-datalake-gen2-1#:~:text=account%20in%20Azure.-,Create%20a%20Container,-Open%20Microsoft%20Azure).
 
 
 ## Integrating Azure Export & Import API with Dataloop Platform
