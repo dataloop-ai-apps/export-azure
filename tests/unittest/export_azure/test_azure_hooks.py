@@ -2,7 +2,7 @@ import os
 import unittest
 import dtlpy as dl
 
-from modules.azure_hooks import HookIntegrationAzure
+from modules.azure_hooks import AzureExport
 
 
 class Node:
@@ -12,10 +12,16 @@ class Node:
 
 class TestRunner(unittest.TestCase):
     def setUp(self):
-        self.runner = HookIntegrationAzure(integration_name='azure-integration')
-        self.original_item = dl.items.get(item_id='658ae4cd160fb30cdebf1156')
-        self.original_annotations = self.original_item.annotations.list()
+        item_id = ""
+        container_name = ""
         remote_filepath = "/clones/1.jpg"
+
+        # Connect .env file
+        if os.environ.get("AZURE_API_KEY") is None:
+            raise ValueError("Missing Azure service integration.")
+        self.runner = AzureExport()
+        self.original_item = dl.items.get(item_id=item_id)
+        self.original_annotations = self.original_item.annotations.list()
         try:
             item = self.original_item.dataset.items.get(filepath=remote_filepath)
             item.delete()
@@ -24,7 +30,7 @@ class TestRunner(unittest.TestCase):
 
         self.item = self.original_item.clone(remote_filepath=remote_filepath)
         self.context = dl.Context()
-        self.context._node = Node(metadata={'customNodeConfig': {'container_name': 'micha-test'}})
+        self.context._node = Node(metadata={'customNodeConfig': {'container_name': container_name}})
 
     def test_export_annotations(self):
         self.runner.export_annotation(item=self.item, context=self.context)
